@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="College Placement Management System">
+    <title>PlacePro | College Placement Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="#" class="brand">
+            <span class="brand-icon">P</span>
+            PlacePro
+        </a>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#companies">Companies</a>
+        </nav>
+
+        <div class="nav-actions" id="navActions">
+            <button class="btn btn-outline" onclick="showAuth('login')">Login</button>
+            <button class="btn btn-primary" onclick="showAuth('register')">Register</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- HOME -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <span class="eyebrow">YOUR CAREER STARTS HERE</span>
+                <h1>Find Your Dream Job.<br>
+                    <span>Build Your Future.</span>
+                </h1>
+                <p>
+                    A centralized placement platform connecting students,
+                    companies and placement officers.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large"
+                        onclick="showAuth('register')">
+                        Get Started →
+                    </button>
+                    <a href="#companies" class="btn btn-outline btn-large">
+                        Explore Companies
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div><strong id="heroStudents">0</strong><small>Students</small></div>
+                    <div><strong id="heroCompanies">0</strong><small>Companies</small></div>
+                    <div><strong id="heroJobs">0</strong><small>Job Opportunities</small></div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="visual-card">
+                    <div class="visual-icon">🎓</div>
+                    <h3>Welcome to PlacePro</h3>
+                    <p>Your career journey begins with the right opportunity.</p>
+                    <div class="progress-label">
+                        <span>Career readiness</span>
+                        <b>85%</b>
+                    </div>
+                    <div class="progress"><span></span></div>
+                    <div class="success-message">✓ Explore placement opportunities</div>
+                </div>
+                <div class="floating-card">🚀 Start your career</div>
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section class="section" id="features">
+            <div class="section-heading">
+                <span class="eyebrow">OUR SERVICES</span>
+                <h2>Everything in One Place</h2>
+                <p>Manage your complete placement journey with ease.</p>
+            </div>
+
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <div class="feature-icon purple">👨‍🎓</div>
+                    <h3>Student Management</h3>
+                    <p>Register students and maintain academic profiles.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon blue">🏢</div>
+                    <h3>Company Management</h3>
+                    <p>Explore companies and their job opportunities.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon green">📋</div>
+                    <h3>Job Applications</h3>
+                    <p>Apply for eligible jobs and track application status.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon orange">📊</div>
+                    <h3>Placement Reports</h3>
+                    <p>View placement statistics and application details.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- COMPANIES -->
+        <section class="section companies-section" id="companies">
+            <div class="section-heading">
+                <span class="eyebrow">CAREER OPPORTUNITIES</span>
+                <h2>Top Hiring Companies</h2>
+                <p>Discover opportunities from leading organizations.</p>
+            </div>
+            <div class="company-grid" id="publicCompanies"></div>
+        </section>
+
+        <!-- AUTHENTICATION -->
+        <section class="auth-section hidden" id="authSection">
+            <div class="auth-card">
+                <button class="close-btn" onclick="hideAuth()">✕</button>
+                <div class="auth-logo">P</div>
+                <h2 id="authTitle">Welcome Back!</h2>
+                <p id="authSubtitle">Login to continue your journey.</p>
+
+                <form id="authForm">
+                    <div id="registerFields" class="hidden">
+                        <label>Full Name</label>
+                        <input type="text" id="studentName" placeholder="Enter your name">
+
+                        <label>Register Number</label>
+                        <input type="text" id="registerNumber" placeholder="Enter register number">
+
+                        <label>Department</label>
+                        <select id="department">
+                            <option value="">Select Department</option>
+                            <option>Information Technology</option>
+                            <option>Computer Science</option>
+                            <option>Artificial Intelligence</option>
+                            <option>Mechanical Engineering</option>
+                            <option>Electrical Engineering</option>
+                            <option>Civil Engineering</option>
+                        </select>
+
+                        <label>CGPA</label>
+                        <input type="number" id="cgpa" placeholder="Example: 8.5"
+                            min="0" max="10" step="0.01">
+                    </div>
+
+                    <label>Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+
+                    <label>Password</label>
+                    <input type="password" id="password"
+                        placeholder="Enter your password" required minlength="6">
+
+                    <button type="submit" class="btn btn-primary full-width" id="authSubmit">
+                        Login
+                    </button>
+                </form>
+
+                <p class="auth-switch" id="authSwitch">
+                    Don't have an account?
+                    <a href="#" onclick="showAuth('register'); return false;">Register</a>
+                </p>
+                <p class="form-message" id="authMessage"></p>
+            </div>
+        </section>
+
+        <!-- DASHBOARD -->
+        <section class="dashboard hidden" id="dashboard">
+            <aside class="sidebar">
+                <div class="sidebar-brand">P <span>PlacePro</span></div>
+                <p class="sidebar-label">MAIN MENU</p>
+                <button class="side-link active" onclick="showPanel('overview',this)">▦ Overview</button>
+                <button class="side-link" onclick="showPanel('profile',this)">👤 My Profile</button>
+                <button class="side-link" onclick="showPanel('jobs',this)">💼 Placement Drives</button>
+                <button class="side-link" onclick="showPanel('applications',this)">📋 My Applications</button>
+                <button class="side-link admin-only hidden" onclick="showPanel('students',this)">🎓 Students</button>
+                <button class="side-link admin-only hidden" onclick="showPanel('manage',this)">🏢 Manage Companies</button>
+                <button class="side-link admin-only hidden" onclick="showPanel('reports',this)">📊 Reports</button>
+                <button class="side-link logout-link" onclick="logout()">↪ Logout</button>
+            </aside>
+
+            <div class="dashboard-main">
+                <div class="dashboard-header">
+                    <div>
+                        <span class="eyebrow">PLACEMENT PORTAL</span>
+                        <h2 id="welcomeTitle">Dashboard</h2>
+                    </div>
+                    <div class="user-chip">
+                        <span class="avatar" id="userAvatar">S</span>
+                        <div><b id="userName">Student</b><small id="userRole">Student</small></div>
+                    </div>
+                </div>
+
+                <!-- OVERVIEW -->
+                <div class="panel" id="panel-overview">
+                    <div class="stats-grid">
+                        <div class="stat-card"><span>👨‍🎓</span><small>Total Students</small><h2 id="statStudents">0</h2></div>
+                        <div class="stat-card"><span>🏢</span><small>Companies</small><h2 id="statCompanies">0</h2></div>
+                        <div class="stat-card"><span>💼</span><small>Job Opportunities</small><h2 id="statJobs">0</h2></div>
+                        <div class="stat-card"><span>📋</span><small>Applications</small><h2 id="statApplications">0</h2></div>
+                    </div>
+                    <div class="content-card">
+                        <div class="card-heading"><h3>Recent Placement Opportunities</h3>
+                        <button class="text-btn" onclick="showPanel('jobs')">View all →</button></div>
+                        <div id="overviewJobs"></div>
+                    </div>
+                </div>
+
+                <!-- PROFILE -->
+                <div class="panel hidden" id="panel-profile">
+                    <div class="content-card">
+                        <h3>My Student Profile</h3>
+                        <div id="profileDetails"></div>
+                    </div>
+                </div>
+
+                <!-- JOBS -->
+                <div class="panel hidden" id="panel-jobs">
+                    <div class="content-card">
+                        <h3>Available Placement Drives</h3>
+                        <p class="muted">Check eligibility before applying.</p>
+                        <div id="jobsList" class="job-list"></div>
+                    </div>
+                </div>
+
+                <!-- APPLICATIONS -->
+                <div class="panel hidden" id="panel-applications">
+                    <div class="content-card">
+                        <h3>My Applications</h3>
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>Company</th><th>Role</th><th>Package</th><th>Status</th></tr></thead>
+                                <tbody id="applicationTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ADMIN STUDENTS -->
+                <div class="panel hidden" id="panel-students">
+                    <div class="content-card">
+                        <h3>Registered Students</h3>
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>Name</th><th>Register No.</th><th>Department</th><th>CGPA</th></tr></thead>
+                                <tbody id="studentsTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ADMIN COMPANY MANAGEMENT -->
+                <div class="panel hidden" id="panel-manage">
+                    <div class="content-card">
+                        <h3>Add New Placement Drive</h3>
+                        <form id="companyForm" class="company-form">
+                            <label>Company Name</label>
+                            <input id="companyName" required placeholder="Company name">
+                            <label>Job Role</label>
+                            <input id="companyRole" required placeholder="Software Developer">
+                            <label>Package (LPA)</label>
+                            <input id="companyPackage" type="number" min="0.1" step="0.1" required>
+                            <label>Minimum CGPA</label>
+                            <input id="companyCgpa" type="number" min="0" max="10" step="0.1" required>
+                            <label>Job Description</label>
+                            <textarea id="companyDescription" required placeholder="Describe the job role"></textarea>
+                            <button class="btn btn-primary" type="submit">+ Add Placement Drive</button>
+                        </form>
+                        <h3 class="subheading">Existing Companies</h3>
+                        <div id="adminCompanyList"></div>
+                    </div>
+                </div>
+
+                <!-- ADMIN REPORTS -->
+                <div class="panel hidden" id="panel-reports">
+                    <div class="content-card">
+                        <h3>Placement Statistics</h3>
+                        <div class="report-grid">
+                            <div><small>Registered Students</small><h2 id="reportStudents">0</h2></div>
+                            <div><small>Total Companies</small><h2 id="reportCompanies">0</h2></div>
+                            <div><small>Total Applications</small><h2 id="reportApplications">0</h2></div>
+                            <div><small>Selected Applications</small><h2 id="reportSelected">0</h2></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="brand"><span class="brand-icon">P</span> PlacePro</div>
+        <p>College Placement Management System</p>
+        <small>© 2026 PlacePro. Mini-project demonstration.</small>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
